@@ -4,3 +4,15 @@
   box-sizing: border-box;
   font-family: "Times New Roman", Times, serif;
 }
+
+:root {
+  --bg: #1a1d21;
+  --bg-dimmed: #2d3136;
+  --text: #d1d2d3;
+  --text-dimmed: #d8dce8b3;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}
