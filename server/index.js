@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 app.use(cors({ origin: "*" }));
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("ricky");
@@ -55,8 +56,27 @@ const messageSchema = new mongoose.Schema(
 const Message = mongoose.model("messages", messageSchema);
 
 app.get("/channels/:id", async (req, res) => {
-  const messages = await Message.find({ channelId: req.params.id });
-  res.send(messages);
+  const channel = await Channel.findById(req.params.id);
+  const messages = await Message.find({ channelId: req.params.id }).sort({
+    createdAt: "desc",
+  });
+
+  res.send({ channel, messages });
+});
+
+app.post("/channels/:id", async (req, res) => {
+  console.log(req.body);
+  await Message.create({
+    text: req.body.text,
+    user: {
+      name: req.body.username,
+      image:
+        "https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=Coco" +
+        req.body.username,
+    },
+    channelId: req.params.id,
+  });
+  res.send("oki");
 });
 
 app.listen(3000, async () => {

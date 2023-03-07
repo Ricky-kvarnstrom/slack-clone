@@ -37,3 +37,17 @@
   width: 100%;
   padding: 20px;
 }
+.channel-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
+}
+.channel-messages-container {
+  flex: 1;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.channel-message-box {
+}
